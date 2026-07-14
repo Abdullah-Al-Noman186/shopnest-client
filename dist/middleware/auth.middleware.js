@@ -1,0 +1,33 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.restrictTo = exports.protect = void 0;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+function protect(req, res, next) {
+    try {
+        const token = req.cookies?.shopnest_token;
+        if (!token) {
+            res.status(401).json({ message: "Not authenticated. Please log in." });
+            return;
+        }
+        const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        req.user = payload;
+        next();
+    }
+    catch {
+        res.status(401).json({ message: "Invalid or expired session." });
+    }
+}
+exports.protect = protect;
+function restrictTo(...roles) {
+    return (req, res, next) => {
+        if (!req.user || !roles.includes(req.user.role)) {
+            res.status(403).json({ message: "You do not have permission." });
+            return;
+        }
+        next();
+    };
+}
+exports.restrictTo = restrictTo;
