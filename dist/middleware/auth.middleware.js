@@ -13,6 +13,7 @@ function protect(req, res, next) {
             return;
         }
         const payload = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        console.log("JWT Payload:", payload);
         req.user = payload;
         next();
     }

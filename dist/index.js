@@ -12,6 +12,9 @@ const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
 const product_routes_1 = __importDefault(require("./routes/product.routes"));
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const error_middleware_1 = require("./middleware/error.middleware");
+const wishlist_routes_1 = __importDefault(require("./routes/wishlist.routes"));
+const cart_routes_1 = __importDefault(require("./routes/cart.routes"));
+const order_routes_1 = __importDefault(require("./routes/order.routes"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
 // Middleware
@@ -25,6 +28,9 @@ app.use((0, cookie_parser_1.default)());
 app.use("/api/auth", auth_routes_1.default);
 app.use("/api/products", product_routes_1.default);
 app.use("/api/users", user_routes_1.default);
+app.use("/api/wishlist", wishlist_routes_1.default);
+app.use("/api/cart", cart_routes_1.default);
+app.use("/api/orders", order_routes_1.default);
 // Health check
 app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", message: "ShopNest API is running." });
