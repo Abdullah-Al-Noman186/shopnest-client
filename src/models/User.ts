@@ -1,11 +1,21 @@
 import { Model, Schema, model, models } from "mongoose";
+<<<<<<< HEAD
 import type { UserRole, UserStatus } from "../types";
+=======
+
+export type UserRole = "buyer" | "seller" | "admin";
+export type UserStatus = "active" | "blocked";
+>>>>>>> 072d33795fd39776427cb4e3eccc83eca78e8ad4
 
 export interface IUser {
   name: string;
   email: string;
   password: string;
+<<<<<<< HEAD
   avatar: string;
+=======
+  avatar?: string;
+>>>>>>> 072d33795fd39776427cb4e3eccc83eca78e8ad4
   role: UserRole;
   status: UserStatus;
   createdAt: Date;
@@ -51,4 +61,8 @@ const userSchema = new Schema<IUser>(
 );
 
 const User: Model<IUser> = models.User || model<IUser>("User", userSchema);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 072d33795fd39776427cb4e3eccc83eca78e8ad4
 export default User;
